@@ -62,7 +62,7 @@ def challenge_entry(sample_path,model1):
     predict = model1.predict(np.array(ecg_data))
     beat_num = len(rpeaks)
     result = np.sum(np.round(predict))/beat_num
-    if result < 0.2 and issubarray(np.array(np.round(predict)),np.array([1,1,1,1,1]))<20:
+    if result < 0.01 and issubarray(np.array(np.round(predict)),np.array([1,1,1,1,1]))<10:
         test_result = 0;
     elif result > 0.9 and issubarray(np.array(np.round(predict)),np.array([0,0,0,0,0]))<5:
         test_result = 1;
@@ -112,6 +112,10 @@ def challenge_entry(sample_path,model1):
         start_r = np.expand_dims(start_r, -1)
         end_r = np.expand_dims(end_r, -1)
         start_end = np.concatenate((rpeaks[start_r], rpeaks[end_r]-1), axis=-1).tolist()
+        if len(start_end)==1  :
+            if abs(start_end[0][0]-rpeaks[0])<=30 and abs(start_end[0][-1]-rpeaks[-1])<=50 :
+                start_end[0][0] = 0
+                start_end[0][-1] = len(sig)-1
         end_points.extend(start_end)
         
     pred_dcit = {'predict_endpoints': end_points}
