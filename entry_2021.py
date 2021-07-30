@@ -112,10 +112,6 @@ def challenge_entry(sample_path,model1):
         start_r = np.expand_dims(start_r, -1)
         end_r = np.expand_dims(end_r, -1)
         start_end = np.concatenate((rpeaks[start_r], rpeaks[end_r]-1), axis=-1).tolist()
-        if len(start_end)==1  :
-            if abs(start_end[0][0]-rpeaks[0])<=30 and abs(start_end[0][-1]-rpeaks[-1])<=50 :
-                start_end[0][0] = 0
-                start_end[0][-1] = len(sig)-1
         end_points.extend(start_end)
         
     pred_dcit = {'predict_endpoints': end_points}
