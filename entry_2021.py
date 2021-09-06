@@ -127,7 +127,7 @@ if __name__ == '__main__':
     if not os.path.exists(RESULT_PATH):
         os.makedirs(RESULT_PATH)
     model = network.build_model()
-    model.load_weights('weights01.hdf5')    
+    model.load_weights('weights02.hdf5')    
     test_set = open(os.path.join(DATA_PATH, 'RECORDS'), 'r').read().splitlines()
     for i, sample in enumerate(test_set):
         sample_path = os.path.join(DATA_PATH, sample)
