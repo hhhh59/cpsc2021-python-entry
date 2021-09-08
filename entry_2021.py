@@ -60,7 +60,8 @@ def challenge_entry(sample_path,model1):
         
     predict = model1.predict(np.array(ecg_data))
     tmp_pre = predict.tolist()
-    tmp_pre.insert(0,tmp_pre[0])
+   # tmp_pre.insert(0,tmp_pre[0])
+    tmp_pre.append(tmp_pre[-1])
     tmp_pre.append(tmp_pre[-1])
     predict = np.array(tmp_pre)
     beat_num = len(rpeaks)-1
