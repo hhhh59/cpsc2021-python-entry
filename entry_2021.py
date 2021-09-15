@@ -47,16 +47,17 @@ def challenge_entry(sample_path,model1):
     This is a baseline method.
     """
     data,length,RwavePos = preprocess(sample_path)
+    sig = data[:, 1]
     
     RwavePos_dif = np.diff(RwavePos)
-    r_f = np.where(RwavePos_dif<30)[0]
+    r_f = np.where(RwavePos_dif<100)[0]
     RwavePos = RwavePos.tolist()
     if np.size(r_f)>0:  
-        for fi in range(1,len(r_f)):
-            del RwavePos[r_f[fi]]         
+        for fi in range(len(r_f)):
+            if sig[RwavePos[r_f[fi]]] < 0.75*sig[RwavePos[r_f[fi]+1]] or sig[RwavePos[r_f[fi]]] < 0.75*sig[RwavePos[r_f[fi]-1]] :
+                del RwavePos[r_f[fi]]  
+       
     RwavePos = np.array(RwavePos)
-    
-    sig = data[:, 1]
     end_points = []
     rpeaks = RwavePos
     ecg_data = []    
