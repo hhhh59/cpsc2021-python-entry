@@ -51,11 +51,21 @@ def challenge_entry(sample_path,model1):
     
     RwavePos_dif = np.diff(RwavePos)
     r_f = np.where(RwavePos_dif<100)[0]
-    RwavePos = RwavePos.tolist()
     if np.size(r_f)>0:  
         for fi in range(len(r_f)):
-            if sig[RwavePos[r_f[fi]]] < 0.75*sig[RwavePos[r_f[fi]+1]] or sig[RwavePos[r_f[fi]]] < 0.75*sig[RwavePos[r_f[fi]-1]] :
-                del RwavePos[r_f[fi]]  
+            # print(fi)
+            if r_f[fi]>0 and r_f[fi]<(len(RwavePos)-2):                            
+                if sig[RwavePos[r_f[fi]]] < 0.6*sig[RwavePos[r_f[fi]+1]] or sig[RwavePos[r_f[fi]]] < 0.6*sig[RwavePos[r_f[fi]-1]] :
+                    RwavePos[r_f[fi]] = 0
+                if sig[RwavePos[r_f[fi]+1]] < 0.6*sig[RwavePos[r_f[fi]]] or sig[RwavePos[r_f[fi]+1]] < 0.6*sig[RwavePos[r_f[fi]+2]] :
+                    RwavePos[r_f[fi]+1] = 0
+            elif r_f[fi]==(len(RwavePos)-2):                            
+                if sig[RwavePos[r_f[fi]]] < 0.6*(sig[RwavePos[r_f[fi]-1]] + sig[RwavePos[r_f[fi]-2]] ):  
+                    RwavePos[r_f[fi]] = 0                
+            elif r_f[fi]==0:                            
+                if sig[RwavePos[r_f[fi]]] < 0.6*(sig[RwavePos[r_f[fi]+1]] + sig[RwavePos[r_f[fi]+2]] ):
+                    RwavePos[r_f[fi]] = 0                          
+    RwavePos = RwavePos[np.where(RwavePos>0)[0]] 
        
     RwavePos = np.array(RwavePos)
     end_points = []
