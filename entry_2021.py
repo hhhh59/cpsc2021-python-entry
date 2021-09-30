@@ -66,7 +66,24 @@ def challenge_entry(sample_path,model1):
                 if sig[RwavePos[r_f[fi]]] < 0.6*(sig[RwavePos[r_f[fi]+1]] + sig[RwavePos[r_f[fi]+2]] ):
                     RwavePos[r_f[fi]] = 0                          
     RwavePos = RwavePos[np.where(RwavePos>0)[0]] 
-       
+    
+    RwavePos_dif = np.diff(RwavePos)
+    r_m = np.where(RwavePos_dif>=400)[0]
+    if np.size(r_m)>0:  
+        r_add = []
+        for fi in range(len(r_m)):
+            y = sig[RwavePos[r_m[fi]] :RwavePos[r_m[fi]+1 ]+1]
+            indexes = peakutils.indexes(y, thres=0.7, min_dist=70)
+            if np.size(indexes)>0:
+                for ri in range(len(indexes)):
+                    r_add.append(indexes[ri])
+                # r_add.append(indexes+RwavePos[r_m[fi]])
+            # 0.6*(y[0]+y[-1])
+        r_add = np.array(r_add).flatten()
+        r = np.concatenate((RwavePos,r_add), axis=-1).tolist()
+        r.sort() 
+        RwavePos = np.array(r)   
+        
     RwavePos = np.array(RwavePos)
     end_points = []
     rpeaks = RwavePos
