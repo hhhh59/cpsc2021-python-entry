@@ -12,11 +12,9 @@ from tensorflow.keras.preprocessing import sequence
 from sklearn.preprocessing import StandardScaler
 from scipy.io import loadmat
 from scipy import signal,interpolate
+import peakutils
 """
-Written by:  Xingyao Wang, Chengyu Liu
-             School of Instrument Science and Engineering
-             Southeast University, China
-             chengyu@seu.edu.cn
+Written by:  
 
 Save answers to '.json' files, the format is as {‘predict_endpoints’: [[s0, e0], [s1, e1], …, [sm-1, em-2]]}.
 """
@@ -76,7 +74,7 @@ def challenge_entry(sample_path,model1):
             indexes = peakutils.indexes(y, thres=0.7, min_dist=70)
             if np.size(indexes)>0:
                 for ri in range(len(indexes)):
-                    r_add.append(indexes[ri])
+                    r_add.append(RwavePos[r_m[fi]]+indexes[ri])
                 # r_add.append(indexes+RwavePos[r_m[fi]])
             # 0.6*(y[0]+y[-1])
         r_add = np.array(r_add).flatten()
