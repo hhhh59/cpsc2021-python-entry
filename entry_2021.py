@@ -86,8 +86,8 @@ def challenge_entry(sample_path,model1):
     end_points = []
     rpeaks = RwavePos
     ecg_data = []    
-    for i in range(len(rpeaks)-4):
-        slice_i = sig[rpeaks[i]:rpeaks[i+3]]
+    for j in range(len(rpeaks)-4):
+        slice_i = sig[int(rpeaks[j]):int(rpeaks[j+3])]
         slice_i = StandardScaler().fit_transform(slice_i.reshape(-1,1))
         scale_ratio = 600/len(slice_i)
         tmp_data = interpolate.pchip_interpolate(np.arange(len(slice_i)) * scale_ratio, slice_i, np.arange(600))
