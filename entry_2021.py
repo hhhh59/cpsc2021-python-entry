@@ -85,8 +85,8 @@ def challenge_entry(sample_path,model1):
     #     r = np.concatenate((RwavePos,r_add), axis=-1).tolist()
     #     r.sort() 
     #     RwavePos = np.array(r)           
-    # RwavePos = np.array(RwavePos)
     
+    RwavePos = np.array(RwavePos)    
     end_points = []
     rpeaks = RwavePos
     ecg_data = []    
@@ -183,8 +183,8 @@ def challenge_entry(sample_path,model1):
 
 
 if __name__ == '__main__':
-    DATA_PATH = 'E:\\ECG_DATA\\CPSC2021_second_batch\\training'
-    RESULT_PATH = 'E:\\CPSC_1.7643\\result22'
+    DATA_PATH = sys.argv[1]
+    RESULT_PATH = sys.argv[2]
     if not os.path.exists(RESULT_PATH):
         os.makedirs(RESULT_PATH)
     model = network.build_model()
