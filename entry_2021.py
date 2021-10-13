@@ -15,10 +15,7 @@ from scipy import signal,interpolate
 import time
 import peakutils
 """
-Written by:  Xingyao Wang, Chengyu Liu
-             School of Instrument Science and Engineering
-             Southeast University, China
-             chengyu@seu.edu.cn
+Written by:  
 
 Save answers to '.json' files, the format is as {‘predict_endpoints’: [[s0, e0], [s1, e1], …, [sm-1, em-2]]}.
 """
