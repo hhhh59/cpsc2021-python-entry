@@ -83,9 +83,9 @@ def challenge_entry(sample_path,model1):
     predict = np.array(tmp_pre)
     beat_num = len(rpeaks)-1
     result = np.sum(np.round(predict))/beat_num
-    if result < 0.1 and issubarray(np.array(np.round(predict)),np.array([1,1,1,1,1]))<5:
+    if result < 0.1 and issubarray(np.array(np.round(predict)),np.array([1,1,1,1,1]))<10:
         test_result = 0;
-    elif result > 0.9 and issubarray(np.array(np.round(predict)),np.array([0,0,0,0,0]))<5:
+    elif result > 0.9 and issubarray(np.array(np.round(predict)),np.array([0,0,0,0,0]))<10:
         test_result = 1;
     else:
         test_result = 2;    
