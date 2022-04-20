@@ -2,7 +2,7 @@
 """
 Created on Tue Jun 15 15:59:23 2021
 
-@author: MyPC
+@author: Tengfei Feng
 """
 import tensorflow as tf
 from tensorflow.keras.layers import Dense,Input,GlobalAveragePooling1D,Dropout,Activation
