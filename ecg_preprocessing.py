@@ -4,12 +4,7 @@ Created on Sat Jun  5 11:43:06 2021
 
 @author: Yating Hu
 """
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 18 16:50:21 2021
 
-@author: Administrator
-"""
 import wfdb
 import numpy as np
 from scipy import signal,interpolate
